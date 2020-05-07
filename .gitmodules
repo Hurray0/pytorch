@@ -130,3 +130,6 @@
     ignore = dirty
     path = third_party/tensorpipe
     url = https://github.com/pytorch/tensorpipe.git
+[submodule "third_party/MegRay"]
+	path = third_party/MegRay
+	url = https://github.com/MegEngine/MegRay.git
