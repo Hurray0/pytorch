@@ -293,6 +293,9 @@ def build_deps():
             sys.exit(1)
 
     check_file(os.path.join(third_party_path, "gloo", "CMakeLists.txt"))
+    check_file(os.path.join(third_party_path, "MegRay", "CMakeLists.txt"))
+    check_file(os.path.join(third_party_path, "MegRay", 'third_party', 
+														'nccl', "Makefile"))
     check_file(os.path.join(third_party_path, "pybind11", "CMakeLists.txt"))
     check_file(os.path.join(third_party_path, 'cpuinfo', 'CMakeLists.txt'))
     check_file(os.path.join(third_party_path, 'tbb', 'Makefile'))
@@ -403,6 +406,13 @@ class build_ext(setuptools.command.build_ext.build_ext):
             report('-- Building NCCL library')
         else:
             report('-- Not using NCCL')
+        if cmake_cache_vars['USE_MEGRAY'] and cmake_cache_vars['USE_SYSTEM_MEGRAY']:
+            report('-- Using system provided MEGRAY library at {}, {}'.format(cmake_cache_vars['MEGRAY_LIBRARIES'],
+                                                                            cmake_cache_vars['MEGRAY_INCLUDE_DIRS']))
+        elif cmake_cache_vars['USE_MEGRAY']:
+            report('-- Building MegRay library')
+        else:
+            report('-- Not using MEGRAY')
         if cmake_cache_vars['USE_DISTRIBUTED']:
             if IS_WINDOWS:
                 report('-- Building without distributed package')

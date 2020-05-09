@@ -1131,6 +1131,13 @@ if(USE_GLOO)
   endif()
 endif()
 
+if(USE_MEGRAY)
+  #include(${CMAKE_CURRENT_LIST_DIR}/External/megray.cmake)
+  #add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/MegRay)
+  include(${CMAKE_CURRENT_LIST_DIR}/MegRay/megray.cmake)
+	message(WARNING "Using MEGRAY")
+endif()
+
 # ---[ profiling
 if(USE_PROF)
   find_package(htrace)
